@@ -45,15 +45,15 @@ function LoginForm() {
           {...register('password', {
             required: true,
             minLength: {
-              value: 2,
+              value: 8,
               message: 'Минимальная длина 8 символов',
             },
             maxLength: {
               value: 150,
-              message: 'Максимальная длина 150 символов',
+              message: 'Максимальная длина 128 символов',
             },
             pattern: {
-              value: /^[\w.@+-]+$/i,
+              value: /^(?=.*[A-Z])(?=.*\d).{8,}$/i,
               message: 'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.',
             },
           })}
