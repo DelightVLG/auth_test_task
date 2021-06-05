@@ -3,10 +3,10 @@ import LoginForm from '../LoginForm/LoginForm';
 
 import './LoginPage.css';
 
-function LoginPage() {
+function LoginPage({ onFormSubmit, isLoginError }) {
   return (
     <div className="login-page">
-      <LoginForm />
+      <LoginForm onSubmit={onFormSubmit} isLoginError={isLoginError} />
     </div>
   );
 }

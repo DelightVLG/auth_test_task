@@ -3,18 +3,18 @@ import { useForm } from 'react-hook-form';
 
 import './LoginForm.css';
 
-function LoginForm() {
+function LoginForm({ onSubmit, isLoginError }) {
   const {
     register, handleSubmit, formState: { errors }, formState,
   } = useForm({ mode: 'onBlur' });
 
-  const onSubmit = (data) => console.log(data);
+  console.log(isLoginError);
 
   return (
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-      <label className="login-form__label" htmlFor="userName">
+      <label className="login-form__label" htmlFor="username">
         Имя пользователя
-        <input {...register('userName', {
+        <input {...register('username', {
           required: {
             value: true,
             message: 'Обязательное поле',
@@ -33,7 +33,7 @@ function LoginForm() {
           },
         })}
         />
-        <span className="login-form__error">{errors.userName && errors.userName.message}</span>
+        <span className="login-form__error">{errors.username && errors.username.message}</span>
       </label>
       <label className="login-form__label" htmlFor="password">
         Пароль
@@ -51,10 +51,6 @@ function LoginForm() {
             maxLength: {
               value: 150,
               message: 'Максимальная длина 128 символов',
-            },
-            pattern: {
-              value: /^(?=.*[A-Z])(?=.*\d).{8,}$/i,
-              message: 'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.',
             },
           })}
         />

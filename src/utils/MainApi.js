@@ -10,6 +10,18 @@ class MainApi {
     this._baseUrl = options.baseUrl;
   }
 
+  getToken(username, password) {
+    return fetch(`${this._baseUrl}/api-token-auth/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+      .then((res) => checkResponse(res));
+  }
+
   getUsers(token) {
     return fetch(`${this._baseUrl}/api/v1/users/`, {
       method: 'GET',

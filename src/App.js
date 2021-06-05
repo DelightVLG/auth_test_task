@@ -1,19 +1,32 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import LoginPage from './components/LoginPage/LoginPage';
 import Main from './components/Main/Main';
 
+import mainApi from './utils/MainApi';
+
 import './App.css';
-// import mainApi from './utils/MainApi';
 
 function App() {
-  // const getData = () => {
-  //   mainApi.getUsers('781bd9f1de084f4daa7ba2aa8a71a2eab855354e')
-  //     .then((data) => console.log(data));
-  // };
-  //
-  // getData();
+  const [isLoginError, setIsLoginError] = useState(false);
+  // const [usersData, setUsersData] = useState([]);
+
+  const history = useHistory();
+
+  const submitHandler = (formData) => {
+    mainApi.getToken(formData.username, formData.password)
+      .then((data) => {
+        if (data) {
+          localStorage.setItem('token', data.token);
+          history.push('/user-page');
+        }
+      })
+      .catch((err) => {
+        setIsLoginError(true);
+        console.error(err);
+      });
+  };
 
   return (
     <div className="App">
@@ -23,7 +36,11 @@ function App() {
         </Route>
 
         <Route path="/login">
-          <LoginPage />
+          <LoginPage onFormSubmit={submitHandler} isLoginError={isLoginError} />
+        </Route>
+
+        <Route path="/user-page">
+          Users data && user info COMPONENT
         </Route>
 
       </Switch>
