@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
 import './LoginForm.css';
 
 function LoginForm({ onSubmit, isLoginError }) {
@@ -14,24 +13,23 @@ function LoginForm({ onSubmit, isLoginError }) {
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
       <label className="login-form__label" htmlFor="username">
         Имя пользователя
-        <input {...register('username', {
-          required: {
-            value: true,
-            message: 'Обязательное поле',
-          },
-          minLength: {
-            value: 2,
-            message: 'Минимальная длина 2 символа',
-          },
-          maxLength: {
-            value: 150,
-            message: 'Максимальная длина 150 символов',
-          },
-          pattern: {
-            value: /^[\w.@+-]+$/i,
-            message: 'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.',
-          },
-        })}
+        <input
+          className="login-form__input"
+          placeholder="Логин"
+          {...register('username', {
+            required: {
+              value: true,
+              message: 'Обязательное поле',
+            },
+            minLength: {
+              value: 2,
+              message: 'Минимальная длина 2 символа',
+            },
+            maxLength: {
+              value: 150,
+              message: 'Максимальная длина 150 символов',
+            },
+          })}
         />
         <span className="login-form__error">{errors.username && errors.username.message}</span>
       </label>
@@ -43,13 +41,16 @@ function LoginForm({ onSubmit, isLoginError }) {
           placeholder="Пароль"
           autoComplete="off"
           {...register('password', {
-            required: true,
+            required: {
+              value: true,
+              message: 'Обязательное поле',
+            },
             minLength: {
-              value: 8,
-              message: 'Минимальная длина 8 символов',
+              value: 1,
+              message: 'Минимальная длина 1 символ',
             },
             maxLength: {
-              value: 150,
+              value: 128,
               message: 'Максимальная длина 128 символов',
             },
           })}
@@ -63,6 +64,13 @@ function LoginForm({ onSubmit, isLoginError }) {
       >
         Войти
       </button>
+      <span
+        className={isLoginError
+          ? 'login-form__error'
+          : 'login-form__error_is-hidden'}
+      >
+        Неверный логин или пароль
+      </span>
     </form>
   );
 }

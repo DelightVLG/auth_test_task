@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
-import LoginPage from './components/LoginPage/LoginPage';
 import Main from './components/Main/Main';
+import LoginPage from './components/LoginPage/LoginPage';
+import UsersPage from './components/UsersPage/UsersPage';
 
 import mainApi from './utils/MainApi';
 
@@ -10,8 +11,6 @@ import './App.css';
 
 function App() {
   const [isLoginError, setIsLoginError] = useState(false);
-  // const [usersData, setUsersData] = useState([]);
-
   const history = useHistory();
 
   const submitHandler = (formData) => {
@@ -19,6 +18,7 @@ function App() {
       .then((data) => {
         if (data) {
           localStorage.setItem('token', data.token);
+          localStorage.setItem('currentUser', formData.username);
           history.push('/user-page');
         }
       })
@@ -30,6 +30,7 @@ function App() {
 
   return (
     <div className="App">
+
       <Switch>
         <Route exact path="/">
           <Main />
@@ -40,10 +41,11 @@ function App() {
         </Route>
 
         <Route path="/user-page">
-          Users data && user info COMPONENT
+          <UsersPage />
         </Route>
 
       </Switch>
+
     </div>
   );
 }

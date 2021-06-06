@@ -18,6 +18,10 @@
   color: red;
 }
 
+.login-form__error_is-hidden {
+  display: none;
+}
+
 .login-form__submit {
 
 }
