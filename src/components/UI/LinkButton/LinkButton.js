@@ -5,7 +5,7 @@ import './LinkButton.css';
 
 function LinkButton({ title, path }) {
   return (
-    <Link to={`/${path}`}>{title}</Link>
+    <Link className="link-button" to={`/${path}`}>{title}</Link>
   );
 }
 
