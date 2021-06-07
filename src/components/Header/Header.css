@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.header__user-data {
+
+}
+
+.header__logout {
+  margin-left: 20px;
+}
