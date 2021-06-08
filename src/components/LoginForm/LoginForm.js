@@ -57,13 +57,16 @@ function LoginForm({ onSubmit, isLoginError, isLoading }) {
           />
           <span className="login-form__error">{errors.password && errors.password.message}</span>
         </label>
-        <button
-          className="login-form__submit"
-          type="submit"
-          disabled={!formState.isValid}
-        >
-          Войти
-        </button>
+        {isLoading ? <Spinner /> : (
+          <button
+            className="login-form__submit"
+            type="submit"
+            disabled={!formState.isValid}
+          >
+            Войти
+          </button>
+        )}
+
         <span
           className={isLoginError
             ? 'login-form__error'
@@ -72,7 +75,6 @@ function LoginForm({ onSubmit, isLoginError, isLoading }) {
           Неверный логин или пароль
         </span>
       </form>
-      {isLoading && <Spinner />}
     </>
   );
 }
